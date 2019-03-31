@@ -4,9 +4,14 @@
 		private function __construct (){}
  
 		public static function conectar(){
-			$pdo_options[PDO::ATTR_ERRMODE]=PDO::ERRMODE_EXCEPTION;
-			self::$conexion= new PDO('mysql:host=localhost;dbname=dmolano','openshift','OpenShift.2596',$pdo_options);
-			return self::$conexion;
+			$dbhost = "127.0.0.1"; // Host name 
+			$dbport = "3306"; // Host port
+			$dbusername = "root"; // Mysql username 
+			$dbpassword = "OpenShift.2596"; // Mysql password 
+			$db_name = "dmolano"; // Database name 
+
+			$mysqlCon = mysqli_connect($dbhost, $dbusername, $dbpassword, "", $dbport) or die("Error: " . mysqli_error($mysqlCon));
+			mysqli_select_db($mysqlCon, $db_name) or die("Error: " . mysqli_error($mysqlCon));
 		}		
 	} 
 ?>
