@@ -8,15 +8,15 @@
 			$db_user = getenv('MYSQL_USER');
 			$db_pass = getenv('MYSQL_PASSWORD');
 			$db_name = 'dmolano'; //this is the database I created in PhpMyAdmin
+			$port = '3306';
 	
-			$db = new mysqli($db_host, $db_user, $db_pass);
+			$db = new mysqli_connect($db_host, $db_user, $db_pass, $db_name, $port);
 
 			if ($db->connect_errno) {
 
     				die('Connect Error (' . $db->connect_errno . ') '
         			. $db->connect_error);
 			}
-			mysqli_select_db($db,$db_name); 
 			return $db;
 		}		
 	} 
