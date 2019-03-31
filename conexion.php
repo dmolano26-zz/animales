@@ -10,7 +10,7 @@
 			$db_name = 'dmolano'; //this is the database I created in PhpMyAdmin
 			$port = '3306';
 	
-			$db = new mysqli_connect($db_host, $db_user, $db_pass, $db_name, $port);
+			$db = new mysqli($db_host, $db_user, $db_pass, $db_name, $port);
 
 			if ($db->connect_errno) {
 
