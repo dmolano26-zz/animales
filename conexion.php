@@ -4,9 +4,9 @@
 		private function __construct (){}
  
 		public static function conectar(){
-			$db_host = getenv('OPENSHIFT_MYSQL_DB_HOST'); //sample host 
-			$db_user = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
-			$db_pass = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
+			$db_host = '127.0.0.1';
+			$db_user = getenv('MYSQL_USER');
+			$db_pass = getenv('MYSQL_PASSWORD');
 			$db_name = 'dmolano'; //this is the database I created in PhpMyAdmin
 	
 			$db = new mysqli($db_host, $db_user, $db_pass);
@@ -17,6 +17,7 @@
         			. $db->connect_error);
 			}
 			mysqli_select_db($db,$db_name); 
+			return $db;
 		}		
 	} 
 ?>
