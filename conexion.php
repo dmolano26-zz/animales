@@ -4,14 +4,19 @@
 		private function __construct (){}
  
 		public static function conectar(){
-			$dbhost = "127.0.0.1"; // Host name 
-			$dbport = "3306"; // Host port
-			$dbusername = "root"; // Mysql username 
-			$dbpassword = "OpenShift.2596"; // Mysql password 
-			$db_name = "dmolano"; // Database name 
+			$db_host = getenv('OPENSHIFT_MYSQL_DB_HOST'); //sample host 
+			$db_user = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
+			$db_pass = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
+			$db_name = 'dmolano'; //this is the database I created in PhpMyAdmin
+	
+			$db = new mysqli($db_host, $db_user, $db_pass);
 
-			$mysqlCon = mysqli_connect($dbhost, $dbusername, $dbpassword, "", $dbport) or die("Error: " . mysqli_error($mysqlCon));
-			mysqli_select_db($mysqlCon, $db_name) or die("Error: " . mysqli_error($mysqlCon));
+			if ($db->connect_errno) {
+
+    				die('Connect Error (' . $db->connect_errno . ') '
+        			. $db->connect_error);
+			}
+			mysqli_select_db($db,$db_name); 
 		}		
 	} 
 ?>
